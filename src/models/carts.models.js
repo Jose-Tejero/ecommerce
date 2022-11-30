@@ -11,11 +11,13 @@ const Carts = db.define('carts', {
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'user_id',
   },
   totalPrice: {
     type: DataTypes.FLOAT,
     allowNull: false,
     defaultValue: 0.00,
+    field: 'total_price',
   },
 });
 

@@ -8,10 +8,10 @@ const ProductInCart = db.define('product_in_cart', {
     autoIncrement: true,
     allowNull: false,
   },
-  cardId: {
+  cartId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'card_id',
+    field: 'cart_id',
   },
   productId: {
     type: DataTypes.INTEGER,

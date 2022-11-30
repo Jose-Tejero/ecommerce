@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const db = require('./utils/database');
 const handleError = require('./middlewares/error.middleware');
+const initModels = require('./models/initModels');
 
 app.use(express.json());
 // app.use(morgan('dev'));
@@ -20,6 +21,8 @@ db.sync({ alter: true })
 app.get('/', () => {
   console.log('Todo bien');
 });
+
+initModels();
 
 app.use(handleError);
 
