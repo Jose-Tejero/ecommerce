@@ -15,7 +15,9 @@ const authenticate = (req, res, next) => {
         message: 'Invalid Token',
       });
     }
-  };
+  } else {
+    res.json({ message: 'No se pudo obtener la autorización' });
+  }
 };
 
 module.exports = authenticate;

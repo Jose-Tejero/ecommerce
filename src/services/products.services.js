@@ -1,4 +1,5 @@
-const { Products } = require('../models');
+const { Products, Users } = require('../models');
+const { Op } = require('sequelize');
 
 class ProductsServices {
   static async getAll() {
@@ -6,13 +7,28 @@ class ProductsServices {
       const result = await Products.findAll({
         where: {
           availableQty: {
-            gt: 0,
-          },
+            [Op.gt]: 0,
+          }
+        },
+        attributes: ['image', 'name'],
+        include: {
+          model: Users,
+          as: 'item',
+          attributes: ['username'],
         },
       });
       return result;
     } catch (error) {
+      throw error;
+    }
+  };
 
+  static async createNewProduct(newProduct) {
+    try {
+      const result = await Products.create(newProduct)
+      return result;
+    } catch (error) {
+      throw error;
     }
   };
 };

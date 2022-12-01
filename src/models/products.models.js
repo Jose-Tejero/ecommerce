@@ -30,6 +30,10 @@ const Products = db.define('products', {
     allowNull: false,
     field: 'user_id',
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = Products;
