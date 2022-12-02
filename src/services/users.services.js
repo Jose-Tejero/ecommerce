@@ -9,6 +9,15 @@ class UsersServices {
       throw error;
     }
   };
+
+  static async findUser(userId) {
+    try {
+      const result = await Users.findByPk(userId);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
 };
 
 module.exports = {
