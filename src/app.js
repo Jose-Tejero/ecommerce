@@ -6,10 +6,13 @@ const db = require('./utils/database');
 const handleError = require('./middlewares/error.middleware');
 const initModels = require('./models/initModels');
 const { usersRoutes, authRoutes, productsRoutes, cartsRoutes, productInCartRoutes, ordersRoutes } = require('./routes');
+const transporter = require('./utils/mailer')
 
 app.use(express.json());
 // app.use(morgan('dev'));
 app.use(cors());
+
+initModels();
 
 db.authenticate()
   .then(() => console.log('Autenticación exitosa'))
@@ -19,7 +22,8 @@ db.sync({ alter: false })
   .then(() => console.log('Base de datos sincronizada'))
   .catch((error) => console.log(error));
 
-initModels();
+transporter.verify()
+  .then(() => console.log('Estamos listos para enviar correos'));
 
 app.get('/', () => {
   console.log('Todo bien');
