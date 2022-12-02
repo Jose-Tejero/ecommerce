@@ -8,12 +8,12 @@ class ProductsServices {
         where: {
           availableQty: {
             [Op.gt]: 0,
-          }
+          },
         },
         attributes: ['image', 'name'],
         include: {
           model: Users,
-          as: 'item',
+          as: 'seller',
           attributes: ['username'],
         },
       });
