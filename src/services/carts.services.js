@@ -31,6 +31,15 @@ class CartsServices {
       throw error;
     }
   };
+
+  static async searchCart(cartId) {
+    try {
+      const result = await Carts.findByPk(cartId);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
 };
 
 module.exports = {
