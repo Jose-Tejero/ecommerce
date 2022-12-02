@@ -6,6 +6,6 @@ const router = Router();
 
 router.post('/carts', authenticate, createNewCart);
 
-router.get('/carts/:userId/:id', authenticate, viewMyCart);
+router.get('/carts/:userId', authenticate, viewMyCart);
 
 module.exports = router;

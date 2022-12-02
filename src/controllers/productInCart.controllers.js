@@ -14,6 +14,21 @@ const createNewProductInCart = async (req, res, next) => {
   }
 };
 
+const purchasedCart = async (req, res, next) => {
+  try {
+    const { cartId } = req.params;
+    const result = await ProductInCartServices.updateCart(cartId);
+    res.status(200).json({ message: 'El carrito ha sido comprado' });
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: 'No se pudo comprar el carrito',
+    });
+  }
+};
+
 module.exports = {
   createNewProductInCart,
+  purchasedCart,
 }

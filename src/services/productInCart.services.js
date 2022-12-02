@@ -9,6 +9,15 @@ class ProductInCartServices {
       throw error;
     }
   };
+
+  static async updateCart(cartId) {
+    try {
+      const result = await ProductInCart.update( {status: 'purchased'}, {where: { cartId }} );
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
 };
 
 module.exports = {
