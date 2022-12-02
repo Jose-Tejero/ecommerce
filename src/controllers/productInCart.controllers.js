@@ -1,4 +1,4 @@
-const { ProductInCartServices, CartsServices } = require('../services');
+const { ProductInCartServices, CartsServices, OrdersServices, ProductInOrderServices } = require('../services');
 
 const createNewProductInCart = async (req, res, next) => {
   try {
@@ -18,7 +18,12 @@ const purchasedCart = async (req, res, next) => {
   try {
     const { cartId } = req.params;
     const search = await CartsServices.searchCart(cartId);
+    const { userId } = search;
     if (search) {
+      const newOrder = await OrdersServices.createOrder(userId);
+      const { id } = newOrder;
+      const newProductInOrder = await ProductInCartServices.getAllPending();
+      newProductInOrder.forEach(async (product) => await ProductInOrderServices.createProductInOrder(id, product));
       const result = await ProductInCartServices.updateCart(cartId);
       res.status(200).json({ message: 'El carrito ha sido comprado' });
     } else {
